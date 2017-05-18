@@ -8,7 +8,7 @@ use utf8::all;
 
 my $ins_1 = SIP::Subtype::Insurance->new(
   id => 1,
-  insur => '养老',
+  insur => '养老保险',
   desp => '职工',
   rate_org => 0.19,
   rate_person => 0.08,
@@ -16,7 +16,7 @@ my $ins_1 = SIP::Subtype::Insurance->new(
 
 my $ins_2 = SIP::Subtype::Insurance->new(
   id => 2,
-  insur => '养老',
+  insur => '养老保险',
   desp => '协解',
   rate_org => 0.0,
   rate_person => 0.20,
