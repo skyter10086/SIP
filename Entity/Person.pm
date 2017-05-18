@@ -5,6 +5,7 @@ use strict;
 use Moose;
 use SIP::DBM::People;
 use SIP::Entity::Orgnization;
+#use SIP::Subtype::Folk; ##废弃不用，貌似把type约束写在别的模块里不行
 use Moose::Util::TypeConstraints;
 use DateTime;
 use utf8::all;  #因为FOLK有汉字，不使用会乱码
@@ -50,9 +51,10 @@ has 'folk' => (
   required => 1,
 );
 
+# 又一个subtype在本模块内才能实现
 subtype 'DWBM',
     as 'Str',
-    where {my %hash = SIP::Entity::Orgnization->get(); exists $hash{$_}};
+    where {my %hash = SIP::Entity::Orgnization->get(); exists $hash{$_}};#相当于filter做validate验证用
     
 
 has 'dwbm' => (is =>'rw' , isa => 'DWBM', required => 1);
