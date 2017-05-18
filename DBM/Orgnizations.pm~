@@ -1,0 +1,32 @@
+﻿#!/usr/bin/perl -w
+
+package SIP::DBM::Orgnizations;
+
+use FindBin qw( $Bin );
+use Moose::Role;
+use Storable qw( store );
+use Data::Dumper;
+
+my $dir = $Bin;
+our $DB_PATH = $dir.'/org.db';
+print $DB_PATH,"\n";
+
+
+sub save {
+  my $self = shift;
+  print $self->{dwbm},"\n";
+  if ($self) {
+    print 'save data to ',$DB_PATH, " !\n";
+	my %orgs;
+	$orgs{$self->{dwbm}} = $self;
+	print Dumper(\%orgs)."\n"x2;
+	store \%orgs , $DB_PATH; 
+	
+  }else{
+    die "You do not have the instance of ",$self->SUPPER," !\n";
+  }
+  
+  print "save() is over!\n"; 
+}
+
+1;

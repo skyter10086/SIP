@@ -1,0 +1,115 @@
+#! /usr/bin/perl -wT
+
+package SIP::Entity::Person;
+
+use strict;
+use Moose;
+use DateTime;
+
+has 'id_num' => (
+  is => 'rw' ,
+  isa => 'Str' ,
+  required => 1,
+);
+ 
+ has 'name' => (
+   is => 'rw',
+   isa => 'Str',
+   required => 1,
+ );
+ 
+has 'scbh' => (
+  is => 'rw',
+  isa => 'Str',
+  required => 1,
+);
+
+has 'aac001' => (
+  is => 'rw',
+  isa => 'Str',
+  
+);
+
+has 'aab001' => (
+  is => 'rw',
+  isa => 'Str',
+);
+
+has 'sex' => (
+  is => 'rw',
+  isa => 'Str',
+  required => 1,
+);
+
+has 'folk' => (
+  is => 'rw',
+  isa => 'Str',
+  required => 1,
+);
+
+has 'dwbm' => (
+  is => 'rw',
+  isa => 'Str',
+);
+
+has 'birth_date' => (
+  is => 'rw',
+  isa =>  'DateTime',
+  required => 1,
+);
+
+has 'hire_date' => (
+  is => 'rw',
+  isa => 'DateTime',
+);
+
+has 'tire_date' => (
+  is => 'rw',
+  isa => 'DateTime',
+);
+
+has 'is_insured' => (
+  is => 'rw',
+  isa => 'Bool',
+  required => 1,
+);
+
+has 'is_existed' => (
+  is => 'rw',
+  isa => 'Bool',
+  required => 1,
+);
+
+has 'insur_base_num' => (
+  is => 'rw',
+  isa => 'Int',
+  required => 1,
+);
+
+has 'photo ' => (
+  is => 'rw',
+  isa => 'Str',
+);
+
+has 'phone' => (
+  is => 'rw',
+  isa => 'Str',
+);
+
+has 'is_married' => (
+  is => 'rw',
+  isa => 'Bool',
+);
+
+has 'couple_id' => (
+  is => 'rw',
+  isa => 'Str',
+);
+
+sub age {
+  my $self = shift;
+  my $age = Datetime::today(time_zone=>'UTC')->subtract_datetime($self->birth_date);
+  return $age; 
+}
+
+1;
