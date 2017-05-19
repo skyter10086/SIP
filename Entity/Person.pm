@@ -136,5 +136,13 @@ has 'age' => (
   
 
 );
+sub prn_attrname {
+  my $class = __PACKAGE__;
+  print $class,"\n";
+  my @list = $class->meta()->get_attribute_list;
+  my $str = join(', ',@list);
+  print $str,"\n";
+
+}
 with 'SIP::DBM::People';
 1;

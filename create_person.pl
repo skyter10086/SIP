@@ -53,3 +53,4 @@ $p_1->birth_date(DateTime->new(
 ));
 print $p_1->age,"\n";
 $p_1->save;
+$p_1->prn_attrname;
