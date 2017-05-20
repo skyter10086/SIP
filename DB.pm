@@ -10,6 +10,7 @@ use Data::Dumper;
 
   my ($dbh, $sth,$tbn,$tb_schema);
   sub init_tab;
+  sub update_tab;
   sub new {
     my $class = shift;
     my $self = shift ;
@@ -71,6 +72,14 @@ sub fetch {
 	$sth = $dbh->prepare(qq{SELECT * FROM ? WHERE id_num = ?}) ;
 	my $rv=$sth->excute($tbn,$id) or die "Fetch data exception: $sth->errstr \n";
 	
+
+}
+sub update_tab {
+my $set_hr = shift;
+my $filt_hr = shift;
+
+
+
 
 }
 
