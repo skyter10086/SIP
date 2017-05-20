@@ -3,12 +3,16 @@
 package SIP::Entity::Person;
 use strict;
 use Moose;
-use SIP::DBM::People;
+#use SIP::DBM;
 use SIP::Entity::Orgnization;
 #use SIP::Subtype::Folk; ##废弃不用，貌似把type约束写在别的模块里不行
 use Moose::Util::TypeConstraints;
 use DateTime;
 use utf8::all;  #因为FOLK有汉字，不使用会乱码
+
+
+
+#our ($table_name , $table_schema);
 
 has 'id_num' => (
   is => 'rw' ,
@@ -124,6 +128,45 @@ sub calc_age {
   my $age = $dt->subtract_datetime($birth);
   return $age->in_units('years');
 }
+has 'set_table' => (
+  default => 'person',
+  is => 'ro',
+  isa => 'Str',
+);
+
+has 'set_schema' => (
+
+  default => qq{
+     CREATE TABLE person (
+       id_num CHAR(18) PRIMARY KEY NOT NULL ,
+       name TEXT NOT NULL,
+       scbh CHAR(11) NOT NULL ,
+       aac001 CHAR(14) ,
+       aab001 CHAR(14) ,
+       sex CHAR(4) ,
+       folk TEXT NOT NULL ,
+       dwbm CHAR(5) NOT NULL,
+       birth_date DATE ,
+       hire_date DATE ,
+       tire_date DATE ,
+       is_insured INT NOT NULL,
+       is_existed INT NOT NULL,
+       insur_base_num NUM NOT NULL,
+       photo TEXT ,
+       phone  TEXT ,
+       is_married INT NOT NULL,
+       couple_id CHAR(18) ,
+       age INT NOT NULL
+
+     )
+
+  },
+  is => 'ro',
+  isa => 'Str',
+#SIP::Entity::Person->set_table;
+#SIP::Entity::Person->set_schema;
+
+);
 
 has 'age' => (
   is => 'rw',
@@ -136,13 +179,5 @@ has 'age' => (
   
 
 );
-sub prn_attrname {
-  my $class = __PACKAGE__;
-  print $class,"\n";
-  my @list = $class->meta()->get_attribute_list;
-  my $str = join(', ',@list);
-  print $str,"\n";
-
-}
-with 'SIP::DBM::People';
+with 'SIP::DBM';
 1;
